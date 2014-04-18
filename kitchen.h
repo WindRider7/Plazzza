@@ -18,9 +18,9 @@ class Kitchen
   int			time;
   std::map<std::string, bool (*)(std::string&)> cmds;
   std::list<Cook*>	cooks;
-  bool    check_status(std::string &);
+  //  bool    check_status(std::string &);
   bool    assign_pizza(std::string &);
-  bool quit_process(std::string &);
+  //  bool quit_process(std::string &);
 public:
   Kitchen(int, int, int);
   bool	work(Fifo *fifoout, Fifo *fifoin);
