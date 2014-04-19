@@ -10,7 +10,7 @@
 class Parse
 {
  private:
-  std::list<std::string*>	order;
+  std::list<std::string>	order;
   std::map<std::string, std::string>	types;
   std::map<std::string, std::string>	sizes;
   int			       pizza_count;
@@ -21,7 +21,7 @@ class Parse
   int  pack_data(std::string &type, std::string &size, std::string &num);
   int  get_order(int p, int tmp, std::string &msg);
   int	get_count();
-  std::string	*get_order_one_pizza();
+  std::string&	get_order_one_pizza();
   void  order_pop();
 };
 

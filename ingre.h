@@ -25,7 +25,7 @@ class	Ingre
 {
  private:
   std::map<std::string, int>	ingres;
-  std::map<typePizza, bool (*)()> cost_ingres;
+  std::map<typePizza, bool (Ingre::*)()> cost_ingres;
   bool	cost_margarita();
   bool  cost_regina(); 
   bool  cost_americana();

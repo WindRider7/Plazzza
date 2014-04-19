@@ -17,17 +17,17 @@ class Kitchen
   int			ncooks;
   int			time;
   std::map<std::string, bool (*)(std::string&)> cmds;
-  std::list<Cook*>	cooks;
+  std::list<Cook>	cooks;
   std::map<std::string, Pizza* (*)(std::string)> instance_pizza;
-  std::list<Pizza*>	pizzas;
+  std::list<Pizza>	pizzas;
   bool    check_status(std::string &);
   bool    assign_pizza(std::string &);
   bool	  quit_process(std::string &);
 public:
   Kitchen(int, int, int);
-  bool	work(Fifo *fifoout, Fifo *fifoin);
+  bool	work(Fifo &fifoout, Fifo &fifoin);
+  void  parse_order(std::string &order);
   ~Kitchen();
-  bool work();
 };
 
 #endif

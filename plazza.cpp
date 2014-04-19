@@ -10,10 +10,10 @@ Plazza::Plazza(int _multiplier, int _cooks, int _time)
   this->pid = getpid();
 }
 
-void	Plazza::assign_to_kitchen(std::string *pizza)
+void	Plazza::assign_to_kitchen(std::string &pizza)
 {
-  std::list<Fifo*>::iterator	itin;
-  std::list<Fifo*>::iterator	itout;
+  std::list<Fifo>::iterator	itin;
+  std::list<Fifo>::iterator	itout;
   std::string res;
   int	_pid;
 
@@ -21,8 +21,8 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
   itout = this->fifosout.begin();
   while (itin != this->fifosin.end())
     {
-      *(*itout) << *pizza;
-      *(*itin) >> res;
+      *itout << pizza;
+      *itin >> res;
       if (res.compare(0, 4, "succ") == 0)
 	break ;
       itin++;
@@ -31,8 +31,8 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
   this->num = this->num + 1;
   if (getpid() == this->pid)
     { 
-      Fifo  *fifoin = new Fifo(this->num, 0);
-      Fifo  *fifoout = new Fifo(this->num, 1);
+      Fifo  fifoin(this->num, 0);
+      Fifo  fifoout(this->num, 1);
       this->fifosin.push_back(fifoin);
       this->fifosout.push_back(fifoout);
       if ((_pid = fork()) < 0)
@@ -44,18 +44,17 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
 	}
       else
 	{
-	  *fifoout << *pizza;
-	  *fifoin >> res;
+	  fifoout << pizza;
+	  fifoin >> res;
 	  std::cout << res << "  res" << std::endl;
 	}
     }
 }
 
-
 void	Plazza::reception()
 {
   std::string	msg;
-  
+
   if (this->pid = getpid())
     {
       while (1)
@@ -76,5 +75,5 @@ void	Plazza::reception()
 
 Plazza::~Plazza()
 {
-  
+
 }

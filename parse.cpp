@@ -43,13 +43,12 @@ int	Parse::pack_data(std::string &type, std::string &size, std::string &num)
     return (1);
   if (this->sizes.find(size) == this->sizes.end())
     return (1);
-  os << this->types[type] << " " << this->sizes[size];
+  os << this->types[type] << this->sizes[size];
   std::istringstream	is(num.substr(1, num.size() - 1));
   is >> n;
   while (i < n)
     {
-      std::string  *pizza = new std::string();
-      pizza->assign(os.str());
+      std::string  pizza = std::string(os.str());
       this->order.push_back(pizza);
       i = i + 1;
     }
@@ -86,12 +85,18 @@ void	Parse::getinfo(std::string &msg)
   while ((p = msg.find(';', p + 1)) != -1)
     {
       if (this->get_order(p, tmp, msg))
-	std::cout << "order error" << std::endl;
+	{
+	  std::cout << "Order error, please input again:" << std::endl;
+	  return ;
+	}
       tmp = p;
       i = i + 1;
     }
   if (i == 0)
-    throw myException("Order error: no ';' as an end");
+    {
+      std::cout << "Order error: no ';' as an end, please input again:" << std::endl;
+      return ;
+    }
 }
 
 int	Parse::get_count()
@@ -99,7 +104,7 @@ int	Parse::get_count()
   return this->pizza_count;
 }
 
-std::string*	Parse::get_order_one_pizza()
+std::string&	Parse::get_order_one_pizza()
 {
   return (*(this->order.begin()));
 }
@@ -108,7 +113,6 @@ void	Parse::order_pop()
 {
   this->pizza_count = this->pizza_count - 1;
   this->order.pop_front();
-  std::cout << this->order.size() << std::endl;
 }
 
 Parse::~Parse()

@@ -53,7 +53,7 @@ bool  Ingre::cost_fantasia()
 
 bool  Ingre::cost_ingre(typePizza type)
 {
-  this->cost_ingres[type]();
+  (this->*cost_ingres[type])();
 }
 
 Ingre::~Ingre()
