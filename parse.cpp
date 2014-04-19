@@ -43,7 +43,7 @@ int	Parse::pack_data(std::string &type, std::string &size, std::string &num)
     return (1);
   if (this->sizes.find(size) == this->sizes.end())
     return (1);
-  os << this->types[type] << this->sizes[size];
+  os << this->types[type] << " " << this->sizes[size];
   std::istringstream	is(num.substr(1, num.size() - 1));
   is >> n;
   while (i < n)
@@ -53,7 +53,6 @@ int	Parse::pack_data(std::string &type, std::string &size, std::string &num)
       this->order.push_back(pizza);
       i = i + 1;
     }
-  std::cout << "this->order.size" << this->order.size() << std::endl;
   this->pizza_count = this->pizza_count + n;
   return (0);
 }

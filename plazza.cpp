@@ -19,36 +19,35 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
 
   itin = this->fifosin.begin();
   itout = this->fifosout.begin();
-  std::cout << *pizza << std::endl;
   while (itin != this->fifosin.end())
     {
-      std::cout << "1111111111111" << std::endl;
       *(*itout) << *pizza;
       *(*itin) >> res;
-      std::cout << "222222222222222" << std::endl;
       if (res.compare(0, 4, "succ") == 0)
 	break ;
       itin++;
       itout++;
     }
   this->num = this->num + 1;
-  Fifo	*fifoin = new Fifo(this->num, 0);
-  Fifo	*fifoout = new Fifo(this->num, 1);
-  this->fifosin.push_back(fifoin);
-  this->fifosout.push_back(fifoout);
-  if ((_pid = fork()) < 0)
-    {
-      std::cout << "fork error" << std::endl;
-      return ;
-    }
-  if (_pid == 0)
-    {
-      Kitchen	kitchen(this->multiplier, this->cooks, this->time);
-      kitchen.work(fifoout, fifoin);
-    }
-  else
-    {
-      
+  if (getpid() == this->pid)
+    { 
+      Fifo  *fifoin = new Fifo(this->num, 0);
+      Fifo  *fifoout = new Fifo(this->num, 1);
+      this->fifosin.push_back(fifoin);
+      this->fifosout.push_back(fifoout);
+      if ((_pid = fork()) < 0)
+	throw myException("fork erro");
+      if(_pid == 0)
+	{
+	  Kitchen	kitchen(this->multiplier, this->cooks, this->time);
+	  kitchen.work(fifoout, fifoin);
+	}
+      else
+	{
+	  *fifoout << *pizza;
+	  *fifoin >> res;
+	  std::cout << res << "  res" << std::endl;
+	}
     }
 }
 
@@ -77,5 +76,5 @@ void	Plazza::reception()
 
 Plazza::~Plazza()
 {
-  delete this->parse;
+  
 }

@@ -2,32 +2,21 @@
 # define PIZZA_H_
 
 #include <string>
-
-typedef enum	TypePizza
-  {
-    Regina = 1,
-    Margarita = 2,
-    Americaine = 4,
-    Fantasia = 8
-  }	typePizza;
-
-typedef enum	TaillePizza
-  {
-    S = 1,
-    M = 2,
-    L = 4,
-    XL = 8,
-    XXL = 16
-  }		taillePizza;
+#include <map>
+#include "ingre.h"
 
 class Pizza
 {
  private:
-  typePizza  type;
-  taillePizza size;
-  std::string	number;
+  typePizza	type;
+  taillePizza   size;
+  std::map<int, int>	cooktimes;
+  int		cooktime;
  public:
-  Pizza(typePizza, taillePizza, std::string &);
+  Pizza(int, int);
+  typePizza	get_type() const;
+  taillePizza	get_size() const;
+  int		get_cooktime() const;
   ~Pizza();
 };
 

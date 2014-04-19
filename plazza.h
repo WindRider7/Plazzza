@@ -14,7 +14,6 @@ class Plazza
   int		multiplier;
   int		cooks;
   int		time;
-  Parse		*parse;
   int		num;
   int		pid;
   std::list<Fifo*>	fifosin;

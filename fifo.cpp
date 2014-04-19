@@ -1,4 +1,5 @@
 #include "fifo.h"
+#include <string.h>
 
 Fifo::Fifo(int num, int set)
 {
@@ -12,11 +13,11 @@ Fifo::Fifo(int num, int set)
     tmp.assign("b");
   os << dir << num << tmp;
   if (mkfifo(os.str().c_str(), O_CREAT | O_RDWR | 0666) < 0)
-    std::cout << "fifo creat error" << std::endl;
+    throw myException("fifo create error");
   this->name.assign(os.str());
-  this->f.open(this->name.c_str(), std::ostream::in | std::ostream::out);
+  //  this->f.open(this->name.c_str(), std::ostream::in | std::ostream::out);
   //  this->outfifo.open(this->name.c_str(), std::istream::out);
-  std::cout << "99999999999" << std::endl;
+  this->fd = open(this->name.c_str(), O_RDWR);
 }
 
 Fifo::~Fifo()
@@ -26,16 +27,17 @@ Fifo::~Fifo()
 
 Fifo	&Fifo::operator>>(std::string &msg)
 {
-  std::cout << "operator1 >>" << std::endl;
-  this->f >> msg;
-  std::cout << "operator2 >>" << std::endl;
+  char	buf[100];
+
+  memset(buf, 0, 100);
+  read(this->fd, buf, sizeof(buf));
+  msg.assign(buf);
   return (*this);
 }	
 
 Fifo	&Fifo::operator<<(std::string &msg)
 {
-  std::cout << "operator1 >> " << std::endl;
-  this->f << msg;
-  std::cout << "operator2 >> " << std::endl;
+  //this->f << msg;
+  write(this->fd, msg.c_str(), msg.size());
   return (*this);
 }

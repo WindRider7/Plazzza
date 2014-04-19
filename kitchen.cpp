@@ -16,14 +16,14 @@ Kitchen::Kitchen(int _multiplier, int _cooks, int _time)
     }
 }
 
-/*void	Kitchen::check_status(std::string &order)
+bool	Kitchen::check_status(std::string &order)
 {
 
-}*/
+}
 
 bool	Kitchen::assign_pizza(std::string &order)
 {
-  /*  std::list<Cook*>::iterator it;
+  std::list<Cook*>::iterator it;
 
   it = this->cooks.begin();
   while (it != this->cooks.end())
@@ -36,28 +36,41 @@ bool	Kitchen::assign_pizza(std::string &order)
 	}
       it++;
     }
-    return (false);*/
+  return (false);
 }
-/*
-void	Kitchen::quit_process(std::string &order)
+
+bool	Kitchen::quit_process(std::string &order)
 {
 
 }
-*/
+
+void	Kitchen::parse_order(std::string &order)
+{
+  
+
+}
+
 bool	Kitchen::work(Fifo *fifoin, Fifo *fifoout)
 {
   std::string	res;
+  std::string	msg;
 
   while (1)
     {
       *fifoin >> res;
-      /* if (!res.empty())
+      if (!res.empty())
 	{
 	  if (this->assign_pizza(res) == false)
-	    *fifoout << "erro";
+	    {
+	      msg.assign("erro");
+	      *fifoout << msg;
+	    }
 	  else
-	    *fifoout << "succ";
-	    }*/
+	    {
+	      msg.assign("succ");
+	      *fifoout << msg;
+	    }
+	}
     }
 }
 

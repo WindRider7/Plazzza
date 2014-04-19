@@ -15,9 +15,10 @@ class Fifo
 {
  private:
   std::string		name;
-  std::fstream		f;
+  //  std::fstream		f;
   // std::ifstream		infifo;
   // std::ofstream		outfifo;
+  int	fd;
  public:
   Fifo(int num, int set);
   ~Fifo();
