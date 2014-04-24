@@ -95,6 +95,7 @@ void	Parse::getinfo(std::string &msg)
     }
   if (i == 0)
     throw myException("Order error: no ';' as an end"); 
+  // Lvl up
 }
 
 int	Parse::get_count()

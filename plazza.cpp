@@ -19,7 +19,7 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
 
   itin = this->fifosin.begin();
   itout = this->fifosout.begin();
-  std::cout << *pizza << std::endl;
+  std::cout << "pizza string ->" << *pizza << "<-" << std::endl;
   while (itin != this->fifosin.end())
     {
       std::cout << "1111111111111" << std::endl;
@@ -75,11 +75,12 @@ void	        Plazza::reception()
 	  parse.getinfo(msg); // U
 	  while (parse.get_count())
 	    {
-	      assign_to_kitchen(parse.get_order_one_pizza()); // lvl down
+	      assign_to_kitchen(parse.get_order_one_pizza()); // lvl down (U)
 	      parse.order_pop();
 	    }
 	}
     }
+    // Lvl up
 }
 
 Plazza::~Plazza()
