@@ -54,26 +54,28 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
 }
 
 
-void	Plazza::reception()
+void	        Plazza::reception()
 {
-  std::string	msg;
-  
-
+  std::string msg;
+  Parse       parse; // types + sizes init
+/*p.s i moved parse here since the order_pop() setting counter back to 
+  0 and deleting pizzas, when all orders procced, meaning you don't need 
+  to recreate the instanse 'Parse' to call the 'getinfo' function
+  Am I right? :) */
   if (this->pid = getpid())
     {
       while (1)
-	{
-	  Parse parse;
+	{ 
     std::cout << "Enter the commands :" << std::endl;
 	  getline(std::cin, msg);
 	  if (msg.compare(0, 4, "quit") == 0)
     {
 	    return ;
     }
-	  parse.getinfo(msg);
+	  parse.getinfo(msg); // U
 	  while (parse.get_count())
 	    {
-	      assign_to_kitchen(parse.get_order_one_pizza());
+	      assign_to_kitchen(parse.get_order_one_pizza()); // lvl down
 	      parse.order_pop();
 	    }
 	}

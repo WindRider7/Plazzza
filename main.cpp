@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
       if (argc != 4)
 	throw myException("the number of parameter should be 4");
       Plazza plazza(2, 2, 2);
-      plazza.reception();
+      plazza.reception(); // Lvl down
     }
   catch(const myException &e)
     {

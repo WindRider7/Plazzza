@@ -46,16 +46,16 @@ int	Parse::pack_data(std::string &type, std::string &size, std::string &num)
   os << this->types[type] << this->sizes[size];
   std::istringstream	is(num.substr(1, num.size() - 1));
   is >> n;
-  while (i < n)
+  while (i < n) // n (regina XXL --> x3 <--)
     {
       std::string  *pizza = new std::string();
       pizza->assign(os.str());
       this->order.push_back(pizza);
       i = i + 1;
     }
-  std::cout << "this->order.size" << this->order.size() << std::endl;
+  std::cout << "this->order.size = " << this->order.size() << std::endl;
   this->pizza_count = this->pizza_count + n;
-  return (0);
+  return (0); // lvl up
 }
 
 int	Parse::get_order(int p, int tmp, std::string &msg)
@@ -71,8 +71,11 @@ int	Parse::get_order(int p, int tmp, std::string &msg)
   std::istringstream	is(cmd);
   is >> type >> size >> num;
   if (type.empty() || size.empty() || num.empty())
-    return (1);
-  return (pack_data(type, size, num));
+    {
+    return (1); // error
+  }
+  return (pack_data(type, size, num)); // return (0) success | lvl down
+  // lvl up
 }
 
 void	Parse::getinfo(std::string &msg)
@@ -86,13 +89,14 @@ void	Parse::getinfo(std::string &msg)
   tmp = 0;
   while ((p = msg.find(';', p + 1)) != -1)
     {
-      if (this->get_order(p, tmp, msg))
+      if (this->get_order(p, tmp, msg)) // lvl down
 	std::cout << "order error" << std::endl;
       tmp = p;
       i = i + 1;
     }
   if (i == 0)
-    throw myException("Order error: no ';' as an end");
+    throw myException("Order error: no ';' as an end"); 
+  // Lvl up 
 }
 
 int	Parse::get_count()
@@ -109,7 +113,7 @@ void	Parse::order_pop()
 {
   this->pizza_count = this->pizza_count - 1;
   this->order.pop_front();
-  std::cout << this->order.size() << std::endl;
+  std::cout << "this->order.size = " << this->order.size() << std::endl;
 }
 
 Parse::~Parse()
