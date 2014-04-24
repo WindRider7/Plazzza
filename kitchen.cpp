@@ -48,8 +48,8 @@ bool	Kitchen::work(Fifo *fifoin, Fifo *fifoout)
 {
   std::string	res;
 
- //  while (1)
- //    {
+  while (1)
+    {
  //      *fifoin >> res;
  //       if (!res.empty())
 	// {
@@ -58,7 +58,7 @@ bool	Kitchen::work(Fifo *fifoin, Fifo *fifoout)
 	//   else
 	//     *fifoout << "succ";
 	//     }
- //    }
+    }
 
 }
 
