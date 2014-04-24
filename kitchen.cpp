@@ -48,17 +48,18 @@ bool	Kitchen::work(Fifo *fifoin, Fifo *fifoout)
 {
   std::string	res;
 
-  while (1)
-    {
-      *fifoin >> res;
-      /* if (!res.empty())
-	{
-	  if (this->assign_pizza(res) == false)
-	    *fifoout << "erro";
-	  else
-	    *fifoout << "succ";
-	    }*/
-    }
+ //  while (1)
+ //    {
+ //      *fifoin >> res;
+ //       if (!res.empty())
+	// {
+	//   if (this->assign_pizza(res) == false)
+	//     *fifoout << "erro";
+	//   else
+	//     *fifoout << "succ";
+	//     }
+ //    }
+
 }
 
 Kitchen::~Kitchen()

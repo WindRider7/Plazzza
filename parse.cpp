@@ -4,6 +4,7 @@
 
 Parse::Parse()
 {
+  std::cout << "Parse Init" << std::endl;
   this->types["regina"] = "1";
   this->types["margarita"] = "2";
   this->types["americaine"] = "4";

@@ -37,7 +37,8 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
 
   this->fifosin.push_back(fifoin);
   this->fifosout.push_back(fifoout);
-  if ((_pid = fork()) < 0)
+  std::cout << "forking ..." << std::endl;
+  if ((_pid = fork()) < 0) // check if fork fails
     {
       std::cout << "fork error" << std::endl;
       return ;
@@ -46,10 +47,11 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
     {
       Kitchen	kitchen(this->multiplier, this->cooks, this->time);
       kitchen.work(fifoout, fifoin);
+      std::cout << "end work" << std::endl;
     }
   else
     {
-      
+      std::cout << "small else" << std::endl;
     }
 }
 
@@ -80,6 +82,8 @@ void	        Plazza::reception()
 	    }
 	}
     }
+    else
+      std::cout << "TEST" << std::endl;
     // Lvl up
 }
 
