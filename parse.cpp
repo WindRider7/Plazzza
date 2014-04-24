@@ -55,7 +55,7 @@ int	Parse::pack_data(std::string &type, std::string &size, std::string &num)
     }
   std::cout << "this->order.size = " << this->order.size() << std::endl;
   this->pizza_count = this->pizza_count + n;
-  return (0); // lvl up
+  return (0);
 }
 
 int	Parse::get_order(int p, int tmp, std::string &msg)
@@ -75,7 +75,6 @@ int	Parse::get_order(int p, int tmp, std::string &msg)
     return (1); // error
   }
   return (pack_data(type, size, num)); // return (0) success | lvl down
-  // lvl up
 }
 
 void	Parse::getinfo(std::string &msg)
@@ -96,7 +95,6 @@ void	Parse::getinfo(std::string &msg)
     }
   if (i == 0)
     throw myException("Order error: no ';' as an end"); 
-  // Lvl up 
 }
 
 int	Parse::get_count()
