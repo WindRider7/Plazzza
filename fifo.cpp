@@ -34,8 +34,8 @@ Fifo	&Fifo::operator>>(std::string &msg)
 
 Fifo	&Fifo::operator<<(std::string &msg)
 {
-  std::cout << "operator1 >> " << std::endl;
+  std::cout << "operator1 << " << std::endl;
   this->f << msg;
-  std::cout << "operator2 >> " << std::endl;
+  std::cout << "operator2 << " << std::endl;
   return (*this);
 }

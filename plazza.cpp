@@ -34,6 +34,7 @@ void	Plazza::assign_to_kitchen(std::string *pizza)
   this->num = this->num + 1;
   Fifo	*fifoin = new Fifo(this->num, 0);
   Fifo	*fifoout = new Fifo(this->num, 1);
+
   this->fifosin.push_back(fifoin);
   this->fifosout.push_back(fifoout);
   if ((_pid = fork()) < 0)
@@ -57,14 +58,18 @@ void	Plazza::reception()
 {
   std::string	msg;
   
+
   if (this->pid = getpid())
     {
       while (1)
 	{
 	  Parse parse;
+    std::cout << "Enter the commands :" << std::endl;
 	  getline(std::cin, msg);
 	  if (msg.compare(0, 4, "quit") == 0)
+    {
 	    return ;
+    }
 	  parse.getinfo(msg);
 	  while (parse.get_count())
 	    {
@@ -77,5 +82,5 @@ void	Plazza::reception()
 
 Plazza::~Plazza()
 {
-  delete this->parse;
+
 }
