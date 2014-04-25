@@ -1,5 +1,7 @@
 #include "plazza.h"
 #include <stdio.h>
+#include <errno.h>
+#include <cstring> // strerror
 
 Plazza::Plazza(int _multiplier, int _cooks, int _time)
 {
@@ -64,6 +66,8 @@ void	Plazza::reception()
 	  getline(std::cin, msg);
 	  if (msg.compare(0, 4, "quit") == 0)
 	    return ;
+    if (msg.compare(0, 4, "exit") == 0)
+      return ;
 	  parse.getinfo(msg);
 	  while (parse.get_count())
 	    {
@@ -76,5 +80,24 @@ void	Plazza::reception()
 
 Plazza::~Plazza()
 {
+  std::string         error;
+  std::ostringstream  fifo;
+  std::string         dir("./fifos/");
 
+  for (int i = 0; i != this->num; ++i)
+  {
+    fifo << dir << (i + 1) << "a";
+    if (remove(fifo.str().c_str()) != 0)
+    {
+      error.append("cleanfifo: ").append(strerror(errno));
+      throw cerrExcept(error);
+    }
+    fifo.str(""); // clean fifo stream
+    fifo << dir << (i + 1) << "b";
+    if (remove(fifo.str().c_str()) != 0)
+    {
+      error.append("cleanfifo: ").append(strerror(errno));
+      throw cerrExcept(error);
+    }    
+  }
 }

@@ -15,6 +15,8 @@ class Fifo
 {
  private:
   std::string		name;
+  
+  bool  exists(const std::string& name);
   //  std::fstream		f;
   // std::ifstream		infifo;
   // std::ofstream		outfifo;

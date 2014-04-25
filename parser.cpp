@@ -31,7 +31,7 @@ params    Parser::parse(std::string M, std::string N, std::string T)
   params  tmp;
 
   if (!isDigits(M) || !isDigits(N) || !isDigits(T))
-    throw coutExcept("Invalid value passed");
+    throw coutExcept(" > Invalid value passed");
   tmp.m = str2int(M);
   tmp.n = str2int(N);
   tmp.t = str2int(T);

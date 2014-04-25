@@ -20,11 +20,11 @@ int       main(int argc, char const *argv[])
 
 try
 {
-  if (p.start(argc, argv, pr) != 1)
+  if (p.start(argc, argv, pr) != 1) // U
     myExit(0);
-  Plazza  plazza(pr.m, pr.n, pr.t); // lvl down
+  Plazza  plazza(pr.m, pr.n, pr.t);
 
-  plazza.reception();
+  plazza.reception(); // lvl down
 }
 catch (const cerrExcept &error)
 {
