@@ -11,17 +11,32 @@
 # include <exception>
 # include "exception.h"
 
-myException::myException(std::string const& msg) throw() : _msg(msg)
+coutExcept::coutExcept(std::string const& msg) throw() : _msg(msg)
 {
 
 }
 
-myException::~myException() throw()
+coutExcept::~coutExcept() throw()
 {
 
 }
 
-const char* myException::what() const throw()
+const char* coutExcept::what() const throw()
+{
+  return (this->_msg.c_str());
+}
+
+cerrExcept::cerrExcept(std::string const& msg) throw() : _msg(msg)
+{
+
+}
+
+cerrExcept::~cerrExcept() throw()
+{
+
+}
+
+const char* cerrExcept::what() const throw()
 {
   return (this->_msg.c_str());
 }

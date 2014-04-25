@@ -14,11 +14,21 @@
 # include <string>
 # include <exception>
 
-class	myException
+class	coutExcept
 {
 public:
-  myException(std::string const& msg) throw();
-  virtual	~myException() throw();
+  coutExcept(std::string const& msg) throw();
+  virtual	~coutExcept() throw();
+  virtual const char* what() const throw();
+private:
+  std::string _msg;
+};
+
+class cerrExcept
+{
+public:
+  cerrExcept(std::string const& msg) throw();
+  virtual ~cerrExcept() throw();
   virtual const char* what() const throw();
 private:
   std::string _msg;

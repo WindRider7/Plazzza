@@ -36,7 +36,7 @@ void	Plazza::assign_to_kitchen(std::string &pizza)
       this->fifosin.push_back(fifoin);
       this->fifosout.push_back(fifoout);
       if ((_pid = fork()) < 0)
-	throw myException("fork erro");
+	throw cerrExcept("fork fail");
       if(_pid == 0)
 	{
 	  Kitchen	kitchen(this->multiplier, this->cooks, this->time);
@@ -54,12 +54,13 @@ void	Plazza::assign_to_kitchen(std::string &pizza)
 void	Plazza::reception()
 {
   std::string	msg;
+  Parse parse;
 
   if (this->pid = getpid())
     {
       while (1)
 	{
-	  Parse parse;
+	  std::cout << " > Enter the commands :" << std::endl;
 	  getline(std::cin, msg);
 	  if (msg.compare(0, 4, "quit") == 0)
 	    return ;

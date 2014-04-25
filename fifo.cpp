@@ -13,7 +13,7 @@ Fifo::Fifo(int num, int set)
     tmp.assign("b");
   os << dir << num << tmp;
   if (mkfifo(os.str().c_str(), O_CREAT | O_RDWR | 0666) < 0)
-    throw myException("fifo create error");
+    throw cerrExcept("fifo create error");
   this->name.assign(os.str());
   //  this->f.open(this->name.c_str(), std::ostream::in | std::ostream::out);
   //  this->outfifo.open(this->name.c_str(), std::istream::out);

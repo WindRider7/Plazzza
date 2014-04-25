@@ -1,18 +1,35 @@
 #include <iostream>
-#include <string>
+#include <cstdlib> // EXIT_
+#include "exception.h"
 #include "plazza.h"
+#include "parser.h"
 
-int	main(int argc, char **argv)
+void  myExit(int s)
 {
-  try
-    {
-      if (argc != 4)
-	throw myException("the number of parameter should be 4");
-      Plazza plazza(2, 2, 2);
-      plazza.reception();
-    }
-  catch(const myException &e)
-    {
-      std::cerr << e.what() << std::endl;
-    }
+  std::cout << " > Exit" << std::endl;
+  if (s == 0)
+    exit(EXIT_SUCCESS);
+  else
+    exit(EXIT_FAILURE);
+}
+
+int       main(int argc, char const *argv[])
+{
+  Parser  p;
+  params  pr;
+
+try
+{
+  if (p.start(argc, argv, pr) != 1)
+    myExit(0);
+  Plazza  plazza(pr.m, pr.n, pr.t); // lvl down
+
+  plazza.reception();
+}
+catch (const cerrExcept &error)
+{
+  std::cerr << "Error: " << error.what() << std::endl;
+  myExit(1);
+}
+  myExit(0);
 }
